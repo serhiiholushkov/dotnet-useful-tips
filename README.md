@@ -4,6 +4,7 @@
 
 - [Aspire](#aspire)
   - [Install](#installation)
+  - [CLI commands](#cli-commands)
 
 # Aspire
 
@@ -36,3 +37,7 @@ export PATH="/Users/<username>/.aspire/bin:$PATH"
 ```
 
 3. restart command line
+
+## CLI commands
+
+[commands](https://learn.microsoft.com/en-us/dotnet/aspire/cli-reference/aspire)
