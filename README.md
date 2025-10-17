@@ -5,6 +5,7 @@
 - [Aspire](#aspire)
   - [Install](#installation)
   - [CLI commands](#cli-commands)
+- []
 
 # Aspire
 
@@ -41,3 +42,52 @@ export PATH="/Users/<username>/.aspire/bin:$PATH"
 ## CLI commands
 
 [commands](https://learn.microsoft.com/en-us/dotnet/aspire/cli-reference/aspire)
+
+# Project setup
+
+Some useful tips, libraries for project setup
+
+## Using central package management (CPM)
+
+Groups all the packages and their versions in on place.
+
+[Docs](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management)
+
+Setup:
+
+1. Create a new file at the root of your repository named Directory.Packages.props that declares your centrally defined package versions and set the MSBuild property ManagePackageVersionsCentrally to true.
+
+```bash
+dotnet new packagesprops
+```
+
+2. Declare <PackageVersion /> items in your Directory.Packages.props.
+
+Example:
+
+```xml
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="PackageA" Version="1.0.0" />
+    <PackageVersion Include="PackageB" Version="2.0.0" />
+  </ItemGroup>
+</Project>
+```
+
+3. Declare <PackageReference /> items without Version attributes in your project files.
+
+Example:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="PackageA" />
+  </ItemGroup>
+</Project>
+```
