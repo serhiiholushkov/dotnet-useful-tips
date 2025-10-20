@@ -5,7 +5,9 @@
 - [Aspire](#aspire)
   - [Install](#installation)
   - [CLI commands](#cli-commands)
-- []
+- [Project setup](#project-setup)
+  - [Central Package Management](#using-central-package-management-cpm)
+  - []
 
 # Aspire
 
@@ -91,3 +93,28 @@ Example:
   </ItemGroup>
 </Project>
 ```
+
+## Central msbuild settings
+
+To share some msbuild props between all projects you can use Directory.Build.props file. It's useful for sharing .net version and other settings.
+
+1. In the root folder create file Directory.Build.props
+
+Example content:
+
+```xml
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWarn>1591</NoWarn> <!-- Remove this to turn on warnings for missing XML Comments -->
+  </PropertyGroup>
+</Project>
+```
+
+2. Remove shared build props from all the projects in solution.
